@@ -1,0 +1,6 @@
+keyboard~=0.13.5
+mss~=6.1.0
+numpy~=1.22.3
+PyDirectInput~=1.0.4
+opencv-python~=4.5.5.64
+imutils~=0.5.4

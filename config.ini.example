@@ -1,0 +1,8 @@
+[keybind]
+red = j
+blue = k
+yellow = l
+; 按键绑定，不支持鼠标，可以绑定一个按键然后再用驱动的宏来操作
+[config]
+debug = false
+;打开 debug 模式后，将会在控制台输出按下的键值

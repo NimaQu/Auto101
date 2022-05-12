@@ -30,7 +30,7 @@ def get_area():
     try:
         area = {"top": list(zip(*loc[::-1]))[0][1], "left": list(zip(*loc[::-1]))[0][0], "width": w, "height": h}
     except IndexError:
-        print("No template found")
+        print("No abilities area found, will check in next 2 seconds")
         return
     return area
 

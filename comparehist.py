@@ -17,7 +17,7 @@ class CompareHist:
         hsv_yellow = cv.cvtColor(yellow, cv.COLOR_BGR2HSV)
         hsv_red = cv.cvtColor(red, cv.COLOR_BGR2HSV)
 
-        ## [Using 50 bins for hue and 60 for saturation]
+        # [Using 50 bins for hue and 60 for saturation]
         h_bins = 50
         s_bins = 60
         self.histSize = [h_bins, s_bins]
@@ -29,7 +29,7 @@ class CompareHist:
 
         # Use the 0-th and 1-st channels
         self.channels = [0, 1]
-        ## [Using 50 bins for hue and 60 for saturation]
+        # [Using 50 bins for hue and 60 for saturation]
 
         self.hist_red = cv.calcHist([hsv_red], self.channels, None, self.histSize, self.ranges, accumulate=False)
         cv.normalize(self.hist_red, self.hist_red, alpha=0, beta=1, norm_type=cv.NORM_MINMAX)
@@ -40,43 +40,49 @@ class CompareHist:
         self.hist_yellow = cv.calcHist([hsv_yellow], self.channels, None, self.histSize, self.ranges, accumulate=False)
         cv.normalize(self.hist_yellow, self.hist_yellow, alpha=0, beta=1, norm_type=cv.NORM_MINMAX)
 
-    def mainn(self, target_img):
-        src_test1 = target_img
+    def cardCheck(self, target_img, card: int):
+        """
+        recognize the card type
+        :param target_img: the image to be recognized
+        :param card: the card type, 1: red, 2: blue, 3: yellow, 0: unknown
+        :return: 1 True or 0 False
+        """
 
-        if src_test1 is None:
+        if target_img is None:
             return
 
-        ## [Convert to HSV]
-        hsv_test1 = cv.cvtColor(src_test1, cv.COLOR_BGR2HSV)
+        # [Convert to HSV]
+        hsv_test1 = cv.cvtColor(target_img, cv.COLOR_BGR2HSV)
 
-        ## [Convert to HSV half]
+        # [Convert to HSV half]
 
-        ## [Calculate the histograms for the HSV images]
+        # [Calculate the histograms for the HSV images]
 
         hist_target = cv.calcHist([hsv_test1], self.channels, None, self.histSize, self.ranges, accumulate=False)
         cv.normalize(hist_target, hist_target, alpha=0, beta=1, norm_type=cv.NORM_MINMAX)
 
-        ## [Apply the histogram comparison methods]
+        # [Apply the histogram comparison methods]
 
-        red_test1 = cv.compareHist(self.hist_red, hist_target, cv.HISTCMP_CORREL)
-        blue_test1 = cv.compareHist(self.hist_blue, hist_target, cv.HISTCMP_CORREL)
-        yellow_test1 = cv.compareHist(self.hist_yellow, hist_target, cv.HISTCMP_CORREL)
+        # compare the histograms
 
-        # print('Hist.Correlation.(base&screen): red_test1:', red_test1)
-        # print('Hist.Correlation.(base&screen): blue_test1:', blue_test1)
-        # print('Hist.Correlation.(base&screen): yellow_test1:', yellow_test1)
-
-        if red_test1 > 0.9:
-            return 'red'
-        elif blue_test1 > 0.9:
-            return 'blue'
-        elif yellow_test1 > 0.9:
-            return 'yellow'
+        if card == 1:
+            if cv.compareHist(self.hist_red, hist_target, cv.HISTCMP_CORREL) > 0.9:
+                return 1
+            else:
+                return 0
+        elif card == 2:
+            if cv.compareHist(self.hist_blue, hist_target, cv.HISTCMP_CORREL) > 0.9:
+                return 1
+            else:
+                return 0
+        elif card == 3:
+            if cv.compareHist(self.hist_yellow, hist_target, cv.HISTCMP_CORREL) > 0.9:
+                return 1
+            else:
+                return 0
         else:
-            return None
+            return 0  # unknown
 
 
 if __name__ == '__main__':
-    comparehist = CompareHist()
-    comparehist.mainn()
-
+    ...
