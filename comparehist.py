@@ -1,6 +1,7 @@
 from __future__ import print_function
 from __future__ import division
 import cv2 as cv
+from sys import exit
 
 
 class CompareHist:
@@ -11,7 +12,7 @@ class CompareHist:
 
         if blue is None or yellow is None or red is None:
             print('Could not open or find the images!')
-            exit(0)
+            exit(1)
 
         hsv_blue = cv.cvtColor(blue, cv.COLOR_BGR2HSV)
         hsv_yellow = cv.cvtColor(yellow, cv.COLOR_BGR2HSV)

@@ -1,4 +1,3 @@
-from comparehist import CompareHist
 import keyboard
 import getarea
 import mss
@@ -6,6 +5,8 @@ import numpy as np
 import pydirectinput
 import time
 from configparser import ConfigParser
+from sys import exit
+from comparehist import CompareHist
 
 config = ConfigParser()
 config.read('config.ini', encoding='utf-8')
@@ -100,3 +101,4 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         print('\n\nProgram terminated')
+        exit(0)
