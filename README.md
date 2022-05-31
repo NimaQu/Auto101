@@ -11,7 +11,10 @@
 
 ## 使用
 前往 [releases](https://github.com/NimaQu/Auto101/releases) 页面下载预先打包好的文件，修改 config.ini 后运行 auto101.exe 即可
-程序运行后会自动检测技能栏的位置，确保技能图表无遮挡并且在屏幕下半部分
+程序运行后会自动检测技能栏的位置，确保技能图标无遮挡并且在屏幕下半部分，不确定皮肤对这里是否有修改，如有修改请自行替换对应图片
+
+## 已知问题
+因为截图是根据我自己电脑上游戏截图的，所以如果你实际游戏中的技能栏有所不同，比如比我 img 文件夹里的 default.png 图片大，可能会一直报错找不到技能区域。这里用的是 opencv 的 matchTemplate，请自行解决
 
 ## 手动安装
 使用 pip 安装 requirements.txt 里的依赖，修改 config.ini 后运行 main.py 即可

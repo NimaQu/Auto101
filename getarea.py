@@ -1,15 +1,18 @@
-import numpy as np
 import cv2
 import imutils
 import mss
+import numpy as np
+import win32api
+import win32con
 
 
 def get_area():
     template = cv2.imread('img/default.png')  # template image
+    width = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)
+    height = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
 
     with mss.mss() as sct:
-        # area = {"top": 720, "left": 640, "width": 1280, "height": 720}
-        area = {"top": 0, "left": 0, "width": 2560, "height": 1440}
+        area = {"top": 0, "left": 0, "width": width, "height": height}
         image_o = np.array(sct.grab(area))
 
     template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
@@ -62,4 +65,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    get_area()

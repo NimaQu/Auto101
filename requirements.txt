@@ -4,3 +4,5 @@ numpy~=1.22.3
 PyDirectInput~=1.0.4
 opencv-python~=4.5.5.64
 imutils~=0.5.4
+pypiwin32~=223
+pywin32~=304
